@@ -10,56 +10,32 @@ import {
 import { TfiClose } from 'react-icons/tfi'
 import { BsTelegram } from 'react-icons/bs'
 import { SlSocialVkontakte } from 'react-icons/sl'
-import Link from 'next/link'
+import Link from 'next/link';
+import { Sparkles } from 'lucide-react';
 
 const Navbar = ({ isPolicyPage = false }) => {
 	// получим текущий адрес страницы
 	const { asPath } = useRouter()
 
 	const [nav, setNav] = useState(false)
-	const [navColor, setNavColor] = useState(
-		isPolicyPage ? 'transparent' : (asPath === '/' ? 'transparent' : 'black')
-	)
-	const [navText, setNavText] = useState(isPolicyPage ? 'black' : 'white')
-
 	const handleNav = () => {
 		setNav(!nav)
 	}
 
-	useEffect(() => {
-		if (isPolicyPage) {
-			setNavColor('transparent');
-			setNavText('black');
-			return;
-		}
-		const changeColor = () => {
-			if (window.scrollY >= 60) {
-				setNavColor('black')
-				// setNavText('black')
-			} else {
-				setNavColor('transparent')
-				// setNavText('white')
-			}
-		}
-
-		window.addEventListener('scroll', changeColor)
-		return () => window.removeEventListener('scroll', changeColor)
-	}, [isPolicyPage])
-
 	return (
 		<header
-			style={{ backgroundColor: `${navColor}` }}
-			className='fixed left-0 top-0 w-full select-none z-[100]'
+			className='fixed left-0 top-0 w-full select-none z-[100] bg-black/30 backdrop-blur-sm'
 		>
 			<div className='mx-auto h-[90px] w-full lg:max-w-7xl'>
 				<div className='relative px-5 flex h-full items-center justify-between lg:px-8'>
 					{/* ЛОГО */}
 					<Link href='/'>
-						<div className='flex items-center justify-between w-[210px]'>
-							<img src='/assets/logo.png' alt='logo' />
+						<div className='flex items-center space-x-2'>
+							<div className="flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-to-br from-pink-500 via-purple-500 to-fuchsia-500 p-1.5">
+								<Sparkles className="text-white w-full h-full" strokeWidth={1.5} />
+							</div>
 							<p
-								style={{ color: isPolicyPage ? 'black' : navText }}
-								className={`uppercase text-xl ml-2 ${isPolicyPage ? 'text-black' : ''}`}
+								className="uppercase text-xl bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent"
 							>
 								нумеролог
 							</p>
@@ -70,42 +46,35 @@ const Navbar = ({ isPolicyPage = false }) => {
 					<div className='flex w-full items-center justify-center'>
 						<nav
 							className={
-								isPolicyPage
-									? (nav
-										? 'left-0 z-199 top-0 w-full h-screen absolute bg-transparent text-black transition-all lg:static lg:block lg:bg-transparent lg:h-full '
-										: '-left-[100%] z-199 top-0 w-full h-screen absolute bg-transparent text-black transition-all lg:static lg:block lg:bg-transparent lg:h-full '
-								)
-								: (
-									nav
-										? 'left-0 z-199 top-0 w-full h-screen absolute bg-black text-white transition-all lg:static lg:block lg:bg-transparent lg:h-full '
-										: '-left-[100%] z-199 top-0 w-full h-screen absolute bg-black text-white transition-all lg:static lg:block lg:bg-transparent lg:h-full '
-								)
+								nav
+									? 'left-0 z-199 top-0 w-full h-screen absolute bg-black text-white transition-all lg:static lg:block lg:bg-transparent lg:h-full '
+									: '-left-[100%] z-199 top-0 w-full h-screen absolute bg-black text-white transition-all lg:static lg:block lg:bg-transparent lg:h-full '
 							}
 						>
 							<ul className={`flex flex-col h-full gap-5 items-center justify-center lg:flex-row lg:justify-center`}>
   <li onClick={handleNav}>
-    <a className={`group text-2xl font-medium duration-200 xl:text-base lg:text-[14px] ${isPolicyPage ? 'text-black hover:text-teal-700' : 'text-white hover:text-teal-500'}`} href='/#top' scroll='false'>Главная<div className='relative w-full h-0.5 bg-teal-500 scale-x-0 group-hover:scale-x-100 transition-transform'></div></a>
+    <a className="group text-2xl font-medium duration-200 xl:text-base lg:text-[14px] text-white hover:text-pink-500" href='/#top' scroll='false'>Главная</a>
   </li>
   <li onClick={handleNav}>
-    <a className={`group text-2xl font-medium duration-200 xl:text-base lg:text-[14px] ${isPolicyPage ? 'text-black hover:text-teal-700' : 'text-white hover:text-teal-500'}`} href='/#about' scroll='false'>Обо мне<div className='relative w-full h-0.5 bg-teal-500 scale-x-0 group-hover:scale-x-100 transition-transform'></div></a>
+    <a className="group text-2xl font-medium duration-200 xl:text-base lg:text-[14px] text-white hover:text-pink-500" href='/#about' scroll='false'>Обо мне</a>
   </li>
   <li onClick={handleNav}>
-    <a className={`group text-2xl font-medium duration-200 xl:text-base lg:text-[14px] ${isPolicyPage ? 'text-black hover:text-teal-700' : 'text-white hover:text-teal-500'}`} href='/#services' scroll='false'>Услуги<div className='relative w-full h-0.5 bg-teal-500 scale-x-0 group-hover:scale-x-100 transition-transform'></div></a>
+    <a className="group text-2xl font-medium duration-200 xl:text-base lg:text-[14px] text-white hover:text-pink-500" href='/#services' scroll='false'>Услуги</a>
   </li>
   <li onClick={handleNav}>
-    <a className={`group text-2xl font-medium duration-200 xl:text-base lg:text-[14px] ${isPolicyPage ? 'text-black hover:text-teal-700' : 'text-white hover:text-teal-500'}`} href='/#new-book-showcase' scroll='false'>Книга<div className='relative w-full h-0.5 bg-teal-500 scale-x-0 group-hover:scale-x-100 transition-transform'></div></a>
+    <a className="group text-2xl font-medium duration-200 xl:text-base lg:text-[14px] text-white hover:text-pink-500" href='/#new-book-showcase' scroll='false'>Книга</a>
   </li>
   <li onClick={handleNav}>
-    <a className={`group text-2xl font-medium duration-200 xl:text-base lg:text-[14px] ${isPolicyPage ? 'text-black hover:text-teal-700' : 'text-white hover:text-teal-500'}`} href='/#course' scroll='false'>Обучение<div className='relative w-full h-0.5 bg-teal-500 scale-x-0 group-hover:scale-x-100 transition-transform'></div></a>
+    <a className="group text-2xl font-medium duration-200 xl:text-base lg:text-[14px] text-white hover:text-pink-500" href='/#course' scroll='false'>Обучение</a>
   </li>
   <li onClick={handleNav}>
-    <a className={`group text-2xl font-medium duration-200 xl:text-base lg:text-[14px] ${isPolicyPage ? 'text-black hover:text-teal-700' : 'text-white hover:text-teal-500'}`} href='/#contacts' scroll='false'>Контакты<div className='relative w-full h-0.5 bg-teal-500 scale-x-0 group-hover:scale-x-100 transition-transform'></div></a>
+    <a className="group text-2xl font-medium duration-200 xl:text-base lg:text-[14px] text-white hover:text-pink-500" href='/#contacts' scroll='false'>Контакты</a>
   </li>
   <li onClick={handleNav}>
     <Link href='https://wa.me/79057444724' target='_blank' scroll={false} legacyBehavior>
       <a>
         <button
-          className={`text-base font-semibold px-5 py-2 rounded-lg shadow bg-gradient-to-r from-teal-400 via-cyan-400 to-teal-600 hover:from-teal-500 hover:via-cyan-500 hover:to-teal-700 text-white transition-all duration-150 hover:scale-105 active:scale-95 border-none uppercase ${isPolicyPage ? 'bg-white text-black hover:bg-teal-100 hover:text-teal-700' : ''}`}
+          className="text-base font-semibold px-5 py-2 rounded-lg shadow bg-gradient-to-r from-pink-500 via-purple-600 to-fuchsia-600 hover:from-pink-600 hover:via-purple-700 hover:to-fuchsia-700 text-white transition-all duration-150 hover:scale-105 active:scale-95 border-none uppercase"
           style={{ minWidth: 180 }}
           aria-label='Получить консультацию в WhatsApp'
         >
@@ -128,15 +97,15 @@ const Navbar = ({ isPolicyPage = false }) => {
 						</button> */}
 
 						{/* КНОПКА МЕНЮ */}
-						<button className={`lg:hidden ${isPolicyPage ? 'text-black' : 'text-white'}`}>
+						<button className="lg:hidden text-white">
 									{nav ? (
 										<TfiClose
-											className={`${isPolicyPage ? 'text-black' : 'text-white'} absolute top-0 right-0 m-5`}
+											className="text-white absolute top-0 right-0 m-5"
 											size={30}
 											onClick={handleNav}
 										/>
 									) : (
-										<AiOutlineMenu className={isPolicyPage ? 'text-black' : 'text-white'} size={30} onClick={handleNav} />
+										<AiOutlineMenu className="text-white" size={30} onClick={handleNav} />
 									)}
 								</button>
 					</div>
